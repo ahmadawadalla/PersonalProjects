@@ -40,7 +40,6 @@ h1{
 #rightDiv{
     margin-top: 10px;
     right: 0;
-    cursor: pointer;
     color: black;
     position: fixed;
 }
@@ -81,6 +80,26 @@ h1{
     padding: 12px 22.5px;
     font-size: 18px;
     z-index: 1;
+}
+
+#wizardUpgrades{
+    overflow-y: auto;
+    border: 4px solid rgba(150, 139, 77, 0.2);
+    margin-top: -5px;
+    margin-left: -4px;
+    text-align: center;
+}
+
+.Upgrades{
+    margin-top: 25px;
+    margin-right: 10px;
+    margin-left: 10px;
+    max-height: 50px;
+    max-width: 90px;
+    padding: 10px;
+    display: none;
+    background: gray;
+    border: black 5px solid;
 }
 
 #numberOfGalleon{
@@ -189,6 +208,8 @@ h1{
 }
 
 /*Hover*/
+.Upgrades:hover,
+button:hover,
 #muggle:hover,
 #goblin:hover,
 #dobby:hover,
@@ -205,14 +226,28 @@ h1{
 {
     background-color: tan;
     color: white;
+    cursor: pointer;
 }
 
+#upgradeInfo{
+    background: rgba(0,0,0,0.95);
+    border: 2px solid rgba(128, 128, 128, 0.75);
+    padding-left: 25px;
+    padding-right: 25px;
+    z-index: 1;
+    color: white;
+    text-align: left;
+    width: 260px;
+    position: absolute;
+    display: none;
+}
 #wizardStats{
+    background-color: black;
     border: 2px solid rgba(128, 128, 128, 0.75);
     font-size: 16px;
     color: white;
-    background-color: black;
     opacity: 92%;
+    z-index: 1;
     width: 375px;
     text-align: left;
     padding-right: 15px;
@@ -220,29 +255,9 @@ h1{
     display: none;
 }
 
-button:hover{
-    background-color: tan;
-    color: white;
-    cursor: pointer;
-}
 
 /*Hidden Divs*/
-#saveVerified{
-    border: 3px solid rgba(128, 128, 128, 0.75);
-    font-size: 25px;
-    color: white;
-    background-color: black;
-    opacity: 90%;
-    width: fit-content;
-    text-align: center;
-    left: 70px;
-    right: 0;
-    bottom: 15px;
-    margin-inline: auto;
-    padding: 45px 55px;
-    position: fixed;
-    display: none;
-}
+
 #verifyReset{
     border: 3px solid rgba(128, 128, 128, 0.75);
     font-size: 25px;
@@ -250,6 +265,7 @@ button:hover{
     background-color: black;
     width: fit-content;
     text-align: center;
+    z-index: 1;
     left: 70px;
     right: 0;
     margin-top: 40px;
@@ -263,6 +279,7 @@ button:hover{
     padding: 5px 10px;
     font-size: 18px;
 }
+#saveVerified,
 #resetVerified{
     border: 3px solid rgba(128, 128, 128, 0.75);
     font-size: 25px;
@@ -279,20 +296,8 @@ button:hover{
     position: fixed;
     display: none;
 }
-#gameStatsBar{
-    overflow-y: auto;
-    border: 3px solid rgba(150, 139, 77, 0.85);
-    font-size: 21px;
-    color: white;
-    background-color: #353131;
-    text-align: center;
-    margin-top: 10px;
-    padding: 45px 55px;
-    left: 509px;
-    z-index: -1;
-    position: fixed;
-    display: none;
-}
+
+#gameStatsBar,
 #gameDescription{
     overflow-y: auto;
     border: 3px solid rgba(150, 139, 77, 0.85);

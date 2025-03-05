@@ -5,6 +5,20 @@ let game = {
     clickRate : 1,
     galleonPS: 0,
 
+    muggleRate : 1,
+    goblinRate : 1,
+    dobbyRate: 1,
+    hagridRate: 1,
+    trelawneyRate: 1,
+    lupinRate: 1,
+    mcGonagallRate: 1,
+    snapeRate: 1,
+    ronRate: 1,
+    hermioneRate: 1,
+    dumbledoreRate: 1,
+    harryRate: 1,
+    voldemortRate: 1,
+
     muggleGPS : 0.1,
     goblinGPS : 1,
     dobbyGPS: 8,
@@ -62,14 +76,28 @@ let gameStats = {
     totalGalleonsEarned: 0
 }
 
-let yPosition = 0
+let upgrades = {
+    // Bought
+    reinforcedMuggleBought : false,
+
+    // Cost
+    reinforcedMuggleCost : 100,
+
+    // Description
+    reinforcedMuggleDescription: "The mouse and Muggles are twice as efficient.",
+
+}
+
+let yMousePosition = 0
+let xMousePosition = 0
 
 window.addEventListener('resize',()=>{
     resizer()
 })
 
 document.addEventListener('mousemove',(event)=>{
-    yPosition = event.clientY - 80
+    yMousePosition = event.clientY
+    xMousePosition = event.clientX
 })
 
 // resizes the divs according to the window size
@@ -78,6 +106,7 @@ function resizer(){
     let gameDescription = document.getElementById('gameDescription')
     let StoreWizards = document.getElementById('StoreWizards')
     let middleDiv = document.getElementById('middleDiv')
+    let upgrades = document.getElementById('wizardUpgrades')
 
     StoreWizards.style.height = window.innerHeight - 125 + 'px'
 
@@ -89,12 +118,16 @@ function resizer(){
 
     middleDiv.style.width = window.innerWidth - 945 +  'px'
     middleDiv.style.height = window.innerHeight - 16 +  'px'
+
+    upgrades.style.width = window.innerWidth - 945 +  'px'
+    upgrades.style.height = window.innerHeight - 93 +  'px'
 }
 
 // Saves the game
 function saveGame(){
     localStorage.setItem("game",JSON.stringify(game))
     localStorage.setItem("gameStats",JSON.stringify(gameStats))
+    localStorage.setItem("upgrades",JSON.stringify(upgrades))
 }
 
 // Opens a div that says that the game is being saved
@@ -113,12 +146,15 @@ function saveVerified(){
 function openStatsBar(){
     let gameStatsBar = document.getElementById('gameStatsBar')
     let gameDescription = document.getElementById('gameDescription')
+    let upgrades = document.getElementById('wizardUpgrades')
 
     if (gameStatsBar.style.display === 'block') {
+        upgrades.style.display = 'block'
         closeStatsBar()
     }
     else {
         gameDescription.style.display = 'none'
+        upgrades.style.display = 'none'
         gameStatsBar.style.display = 'block'
         update()
     }
@@ -141,12 +177,15 @@ function closeStatsBar(){
 function openGameDescription(){
     let gameDescription = document.getElementById('gameDescription')
     let gameStatsBar = document.getElementById('gameStatsBar')
+    let upgrades = document.getElementById('wizardUpgrades')
 
     if (gameDescription.style.display === 'block') {
+        upgrades.style.display = 'block'
         closeGameDescription()
     }
     else {
         gameStatsBar.style.display = 'none'
+        upgrades.style.display = 'none'
         gameDescription.style.display = 'block'
         update()
     }
@@ -205,6 +244,9 @@ function update(){
     document.getElementById('galleonPerSecond').innerHTML = `${numberString(game.galleonPS)} PER SECOND`
     updateTime()
     updateWizards()
+    upgradeBought()
+    showUpgrade()
+
 
     let gameStatsBar = document.getElementById('gameStatsBar')
     let timePlayed = document.getElementById('timePlayed')
@@ -284,28 +326,28 @@ function timeString(time){
 // converts number to string
 function numberString(number){
     // million
-    if(number >= 1000000){
+    if(number >= 10 ** 6){
         // billion
-        if (number >= 1000000000){
+        if (number >= 10 ** 9){
             // trillion
-            if (number >= 1000000000000){
+            if (number >= 10 ** 12){
                 // quadrillion
-                if (number >= 1000000000000000){
-                    number /= 1000000000000000
+                if (number >= 10 ** 15){
+                    number /= 10 ** 15
                     return  parseFloat(number.toFixed(2)).toLocaleString() + ' Quadrillion'
                 }
                 else{
-                    number /= 1000000000000
+                    number /= 10 ** 12
                     return  parseFloat(number.toFixed(2)).toLocaleString() + ' Trillion'
                 }
             }
             else{
-                number /= 1000000000
+                number /= 10 ** 9
                 return  parseFloat(number.toFixed(2)).toLocaleString() + ' Billion'
             }
         }
         else {
-            number /= 1000000
+            number /= 10 ** 6
             return  parseFloat(number.toFixed(2)).toLocaleString() + ' Million'
         }
     }
@@ -324,7 +366,7 @@ function updateWizards(){
     for(let key in game){
         if(key.indexOf('Cost') !== -1){
             document.getElementById(key).innerHTML = `${numberString(game[key])}`
-            if(game.galleon > game[key]){
+            if(game.galleon >= game[key]){
                 let wizard = document.getElementById(key.substring(0,key.indexOf('Cost')))
                 wizard.style.opacity = '100%'
 
@@ -373,7 +415,7 @@ function wizards(idName){
     if(game.galleon >= game[cost]) {
         game.galleon -= game[cost]
         game[level] += 1
-        game.galleonPS += game[gps]
+        game.galleonPS += (game[gps] * game[wizardName + 'Rate'])
         game[cost] = Math.floor(game[cost] * 1.15)
 
         playWizardNoise(wizardName)
@@ -389,40 +431,48 @@ function playWizardNoise(wizardName){
     sound.play()
 }
 
-// gets x and y position when you hover over wizards
-function getPosition(idName){
+// updates wizard stats when you hover over a wizard
+function wizardStatsUpdate(idName){
+    // position
     let wizardStats = document.getElementById('wizardStats')
     let e = document.getElementById(idName.id)
-    wizardStatsUpdate(idName)
+
     let xPosition = document.getElementById(idName.id).getBoundingClientRect().x - 425
     e.addEventListener('mousemove',()=>{
-        wizardStats.style.top = yPosition + 'px';
+        wizardStats.style.top = yMousePosition - 80 + 'px';
         wizardStats.style.left = xPosition + 'px';
         wizardStats.style.display = 'block'
     })
-}
 
-// updates wizard stats when you hover over a wizard
-function wizardStatsUpdate(idName){
-    let wizardName = idName.id
-    let level = game[wizardName + 'Level']
-    let GPS = game[wizardName + 'GPS']
-    let GPSPercent = ((GPS * level) * 100 / game.galleonPS).toFixed(1)
-    let timeLeftToBuy = 0
-    if(game.galleon < game[wizardName + 'Cost'])
-        timeLeftToBuy = (game[wizardName + 'Cost'] - game.galleon)/ game.galleonPS
-
-    wizardName = wizardName[0].toUpperCase() + wizardName.substring(1)
-
-    if (GPSPercent * 10 % 10 === 0){
-        GPSPercent -= '.0'
-    }
 
     let wizardStatsLevel = document.getElementById('wizardStatsLevel')
     let wizardStatsGPSPer = document.getElementById('wizardStatsGPSPer')
     let wizardStatsGPSTotal = document.getElementById('wizardStatsGPSTotal')
     let wizardStatsTimeLeft = document.getElementById('wizardStatsTimeLeft')
 
+    let wizardName = idName. id
+    let level = game[wizardName + 'Level']
+    let GPS = (game[wizardName + 'GPS'] * game[wizardName + 'Rate'])
+    let GPSPercent = ((GPS * level) * 100 / game.galleonPS).toFixed(1)
+    let timeLeftToBuy = 0
+
+    // time left
+    if(game.galleon < game[wizardName + 'Cost'])
+        timeLeftToBuy = (game[wizardName + 'Cost'] - game.galleon)/ game.galleonPS
+    if(game.galleon < game[wizardName + 'Cost'] && game.galleonPS === 0)
+        wizardStatsTimeLeft.innerHTML = 'Time Left: N/A'
+
+    else
+        wizardStatsTimeLeft.innerHTML = `Time Left: ${timeString(timeLeftToBuy)}`
+
+    // percentage of gps
+    wizardName = wizardName[0].toUpperCase() + wizardName.substring(1)
+
+    if (GPSPercent * 10 % 10 === 0){
+        GPSPercent -= '.0'
+    }
+
+    // information on wizard
     wizardStatsLevel.innerHTML = `Owned: ${level}`
     wizardStatsGPSPer.innerHTML = `\nEach ${wizardName} produces ${numberString(GPS)} per second\n`
     if(level > 0)
@@ -430,26 +480,101 @@ function wizardStatsUpdate(idName){
     else
         wizardStatsGPSTotal.innerHTML = `${wizardName} is currently not producing any per second\n`
 
-    if(game.galleonPS === 0){
-        wizardStatsTimeLeft.innerHTML = 'Time Left: N/A'
-    }
-    else{
-        wizardStatsTimeLeft.innerHTML = `Time Left: ${timeString(timeLeftToBuy)}`
-    }
 }
 
 // removes wizards stats once you un-hover from a wizard
 function wizardStatsRemove(){
     let wizardStats = document.getElementById('wizardStats')
-    let wizardStatsLevel = document.getElementById('wizardStatsLevel')
-    let wizardStatsGPSPer = document.getElementById('wizardStatsGPSPer')
-    let wizardStatsGPSTotal = document.getElementById('wizardStatsGPSTotal')
-
-    wizardStatsLevel.innerHTML = ''
-    wizardStatsGPSPer.innerHTML = ''
-    wizardStatsGPSTotal.innerHTML = ''
-
     wizardStats.style.display = 'none'
+}
+
+// removes the upgrades that were bought from the screen
+function upgradeBought(){
+    for(let key in upgrades) {
+        if (key.indexOf('Bought') !== -1) {
+            if(upgrades[key]){
+                document.getElementById(key.slice(0,-6)).style.display = 'none'
+            }
+        }
+    }
+}
+
+// shows the upgrade on the screen
+function showUpgrade(){
+    // change for each upgrade added
+    if(!upgrades['reinforcedMuggleBought'] && game.muggleLevel > 0){
+        document.getElementById('reinforcedMuggle').style.display = 'inline-grid'
+    }
+}
+
+// what happens when upgrade is bought
+function buyUpgrade(idName) {
+    let upgradeName = idName.id
+    if(game.galleon >= upgrades[upgradeName + 'Cost']){
+        game.galleon -= upgrades[upgradeName + 'Cost']
+        upgrades[upgradeName + 'Bought'] = true
+        // change for each upgrade added
+
+        // The mouse and Muggles are twice as efficient
+        if(upgradeName === 'reinforcedMuggle'){
+            game.clickRate *= 2
+            game.galleonPS -= ((game.muggleGPS * game.muggleRate) * game.muggleLevel)
+            game.muggleRate *= 2
+            game.galleonPS += ((game.muggleGPS * game.muggleRate) * game.muggleLevel)
+            update()
+        }
+    }
+}
+
+// updates upgrade info when you hover over an upgrade
+function upgradeInfoUpdate(idName){
+    // position
+    let upgrade = document.getElementById('upgradeInfo')
+    let e = document.getElementById(idName.id)
+
+    let yPosition = document.getElementById(idName.id).getBoundingClientRect().y - 145
+    e.addEventListener('mousemove',()=>{
+        upgrade.style.top = yPosition - 20 + 'px';
+        upgrade.style.left = xMousePosition - 165 + 'px';
+        upgrade.style.display = 'block'
+    })
+
+    let upgradeName = idName.id
+    let upgradeTimeLeft = document.getElementById('upgradeTimeLeft')
+    let upgradeTitle = document.getElementById('upgradeTitle')
+    let upgradeDescription = document.getElementById('upgradeDescription')
+    let upgradeCost = document.getElementById('upgradeCost')
+    let timeLeftToBuy = 0
+
+    // time left
+    if(game.galleon < upgrades[upgradeName + 'Cost'] && game.galleonPS > 0)
+        timeLeftToBuy = (upgrades[upgradeName + 'Cost'] - game.galleon)/ game.galleonPS
+
+    if(game.galleon < upgrades[upgradeName + 'Cost'] && game.galleonPS === 0)
+        upgradeTimeLeft.innerHTML = 'Time Left: N/A'
+
+    else
+        upgradeTimeLeft.innerHTML = `Time Left: ${timeString(timeLeftToBuy)}`
+
+    // upgrade title
+    let spacedUpgradeName = upgradeName[0].toUpperCase()
+    for(let i = 1; i < upgradeName.length; i++){
+        if (upgradeName[i] === upgradeName[i].toUpperCase()){
+            spacedUpgradeName += ' '
+        }
+        spacedUpgradeName += upgradeName[i]
+    }
+    upgradeTitle.innerHTML = spacedUpgradeName
+    // upgrade description
+    upgradeDescription.innerHTML = upgrades[upgradeName + 'Description']
+    // upgrade cost
+    upgradeCost.innerHTML = upgrades[upgradeName + 'Cost']
+}
+
+// removes upgrade info once you un-hover from an upgrade
+function upgradeInfoRemove(){
+    let upgrade = document.getElementById('upgradeInfo')
+    upgrade.style.display = 'none'
 }
 
 // self calling function
@@ -460,13 +585,18 @@ function wizardStatsRemove(){
     else
         game = JSON.parse(localStorage.getItem("game"))
 
+    // save upgrade items
+    if (localStorage.getItem("upgrades") == null)
+        localStorage.setItem("upgrades", JSON.stringify(upgrades))
+    else
+        upgrades = JSON.parse(localStorage.getItem("upgrades"))
+
     // save game stats
     if (localStorage.getItem("gameStats") == null)
         localStorage.setItem("gameStats", JSON.stringify(gameStats))
     else
         gameStats = JSON.parse(localStorage.getItem("gameStats"))
 
-    updateWizards()
     update()
     saveGame()
     resizer()
