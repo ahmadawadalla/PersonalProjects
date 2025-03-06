@@ -22,20 +22,6 @@
     <img id="gringotsBackground" src ='Pictures/GringotsBG.png'/>
 </div>
 
-<!-- upgrade info -->
-<div id="upgradeInfo">
-    <h2 id="upgradeTitle" style="font-size: 16px; float: left"></h2>
-    <h3 style="font-size: 13px; float: right;">
-        <img src="Pictures/Galleon.png" height="15" width="15">
-        <p id="upgradeCost" style="display: inline;"></p>
-    </h3>
-    <hr style="margin-top: 50px; opacity: 45%; width: 103%; margin-left: -6px">
-
-    <ul style="margin-left: -25px; padding-top: 5px">
-        <li id="upgradeDescription"></li>
-        <li id="upgradeTimeLeft"></li>
-    </ul>
-</div>
 <div id="middleDiv">
     <div id="options">
         <button id="saveButton" onclick="saveVerified()">Save</button>
@@ -72,17 +58,6 @@
                 Version: 1.0.2
             </p>
         </div>
-    </div>
-
-    <div id="wizardUpgrades" >
-        <p style="color: white; font-size: 22px; position: fixed; left: 75px; right: 0;">Upgrades: </p>
-        <br><br><br><br><br>
-        <br><br><br><br><br>
-
-        <div class="Upgrades" id="reinforcedMuggle" onclick="buyUpgrade(this)" onmouseover="upgradeInfoUpdate(this)" onmouseleave="upgradeInfoRemove()">
-            <img src="Pictures/Muggle.png" height="55" width="90">
-        </div>
-
     </div>
 </div>
 

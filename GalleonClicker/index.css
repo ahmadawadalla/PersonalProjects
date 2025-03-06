@@ -82,26 +82,6 @@ h1{
     z-index: 1;
 }
 
-#wizardUpgrades{
-    overflow-y: auto;
-    border: 4px solid rgba(150, 139, 77, 0.2);
-    margin-top: -5px;
-    margin-left: -4px;
-    text-align: center;
-}
-
-.Upgrades{
-    margin-top: 25px;
-    margin-right: 10px;
-    margin-left: 10px;
-    max-height: 50px;
-    max-width: 90px;
-    padding: 10px;
-    display: none;
-    background: gray;
-    border: black 5px solid;
-}
-
 #numberOfGalleon{
     background-color: rgba(204, 112, 215, 0.19);
     color: ghostwhite;
@@ -208,7 +188,6 @@ h1{
 }
 
 /*Hover*/
-.Upgrades:hover,
 button:hover,
 #muggle:hover,
 #goblin:hover,
@@ -229,18 +208,6 @@ button:hover,
     cursor: pointer;
 }
 
-#upgradeInfo{
-    background: rgba(0,0,0,0.95);
-    border: 2px solid rgba(128, 128, 128, 0.75);
-    padding-left: 25px;
-    padding-right: 25px;
-    z-index: 1;
-    color: white;
-    text-align: left;
-    width: 260px;
-    position: absolute;
-    display: none;
-}
 #wizardStats{
     background-color: black;
     border: 2px solid rgba(128, 128, 128, 0.75);
