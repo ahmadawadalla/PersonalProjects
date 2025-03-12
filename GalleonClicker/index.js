@@ -545,9 +545,9 @@ function update(){
     }
 
     // checks if cheated
-    // if(gameStats.totalGalleonsEarned < game.galleon){
-    //     location.reload()
-    // }
+    if(gameStats.totalGalleonsEarned < game.galleon){
+        location.reload()
+    }
 }
 
 // the time in seconds, mins, etc.
