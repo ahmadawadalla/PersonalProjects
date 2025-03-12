@@ -10,19 +10,13 @@ img{
 
 #gringotsBackground{
     top: 174px;
-    opacity: 55%;
+    opacity: 45%;
     height: 650px;
+    position: fixed;
 }
 
-h1{
-    background-color: rgba(204, 112, 215, 0.19);
-    font-size: 26px;
-    margin-top: 100px;
-    padding: 2px 95px;
-    left: 70px;
-    top: -50px;
-    color: white;
-    position: fixed;
+button{
+    transition: transform 200ms;
 }
 
 #leftDiv{
@@ -32,7 +26,7 @@ h1{
 
 #middleDiv{
     background-color: #353131;
-    border: solid 4px rgba(150, 139, 77, 0.85);
+    border: solid 4px rgba(150, 139, 77);
     position: fixed;
     margin-left: 500px;
 }
@@ -44,10 +38,22 @@ h1{
     position: fixed;
 }
 
+#pageTitle{
+    background-color: rgba(204, 112, 215, 0.19);
+    border-radius: 10px;
+    font-size: 24px;
+    margin-top: 100px;
+    text-align: center;
+    padding: 4px 75px;
+    top: -50px;
+    color: white;
+    position: fixed;
+}
+
 #options{
     background-color: rgba(76, 59, 134, 0.75);
     padding: 12px;
-    border-bottom: solid 4px rgba(150, 139, 77, 0.85);
+    border-bottom: solid 4px rgba(150, 139, 77);
     text-align: center;
 }
 #saveButton{
@@ -82,33 +88,85 @@ h1{
     z-index: 1;
 }
 
+#middleUpgradeDiv{
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#upgradeContainer{
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.Upgrades{
+    margin: 5px;
+    height: 85px;
+    width: 85px;
+    align-items: center;
+    display: none;
+    justify-content: center;
+    transition: transform 300ms;
+    background: transparent;
+    border: rgb(189, 168, 32, 0.75) 3px solid;
+}
+
 #numberOfGalleon{
     background-color: rgba(204, 112, 215, 0.19);
     color: ghostwhite;
     text-align: center;
     font-size: 24px;
     height: 60px;
-    width: 470px;
-    padding: 1px 30px 10px 20px;
-    margin-left: -11px;
+    width: 446px;
+    padding: 1px 30px 10px 30px;
     margin-top: 95px;
     position: relative;
 }
+
 #Galleon{
+    display: flex;
+    width: 506px;
+    justify-content: center;
+    align-items: center;
     z-index: 1;
-    position: absolute;
+    position: fixed;
     color: ghostwhite;
     margin-top: 75px;
-    left: 130px;
+}
+
+#galleonPicture{
+    border-radius: 5000px;
+    filter: drop-shadow(0px 8px 12px rgba(0, 0, 0, 0.75));
     cursor: pointer;
+    transition: 135ms;
+}
+
+#galleonPicture:hover{
+    transform: scale(105%);
+}
+
+#galleonPicture:active{
+    transform: scale(97%);
+}
+
+#galleonPerSecond{
+    width: 506px;
+    justify-content: center;
+    top:215px;
+    text-align: center;
+    color: white;
+    position: fixed;
+    z-index: 1;
 }
 
 /*Store Items*/
 
 #StoreWizards{
-    overflow-y: auto;
+    overflow-y: scroll;
+    overflow-x: hidden;
     float: right;
 }
+
 #StoreTitle{
     color: White;
     font-size: 30px;
@@ -117,31 +175,13 @@ h1{
 }
 
 /*Wizards*/
-#muggle{
+.wizard {
     background-color: white;
     border: solid white;
-    opacity: 11%;
-    height: 100px;
-}
-#goblin,
-#dobby,
-#hagrid,
-#trelawney,
-#lupin,
-#mcGonagall,
-#snape,
-#ron,
-#hermione,
-#dumbledore,
-#harry,
-#voldemort
-{
-    background-color: white;
-    border: solid white;
-    opacity: 11%;
     height: 100px;
     width: 385px;
-    margin-top: 30px;
+    transition: transform 250ms;
+    margin-top: 25px;
 }
 
 /*Levels*/
@@ -188,7 +228,6 @@ h1{
 }
 
 /*Hover*/
-button:hover,
 #muggle:hover,
 #goblin:hover,
 #dobby:hover,
@@ -206,8 +245,38 @@ button:hover,
     background-color: tan;
     color: white;
     cursor: pointer;
+    box-shadow: black 3.5px 8px 10px;
+    transform:  translateY(-5px);
 }
 
+button:hover{
+    background-color: tan;
+    color: white;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.65) 2px 4px 12px;
+    transform: translateY(-1.5px);
+}
+
+.Upgrades:hover{
+    transform: translateY(-5px);
+    background-color: rgba(210, 180, 140, 0.85);
+    color: white;
+    cursor: pointer;
+    box-shadow: black 2px 6px 8px;
+}
+
+#upgradeInfo{
+    background: rgba(0,0,0,0.95);
+    border: 2px solid rgba(128, 128, 128, 0.75);
+    padding-left: 25px;
+    padding-right: 25px;
+    z-index: 1;
+    color: white;
+    text-align: left;
+    width: 300px;
+    position: absolute;
+    display: none;
+}
 #wizardStats{
     background-color: black;
     border: 2px solid rgba(128, 128, 128, 0.75);
@@ -224,10 +293,10 @@ button:hover,
 
 
 /*Hidden Divs*/
-
-#verifyReset{
+#verifyReset,
+#verifyReset2{
     border: 3px solid rgba(128, 128, 128, 0.75);
-    font-size: 25px;
+    font-size: 22px;
     color: white;
     background-color: black;
     width: fit-content;
@@ -235,31 +304,39 @@ button:hover,
     z-index: 1;
     left: 70px;
     right: 0;
-    margin-top: 40px;
+    margin-top: 30px;
     margin-inline: auto;
-    padding: 40px 55px;
+    padding: 15px 45px 35px;
+
     position: fixed;
     display: none;
 }
+#verifyReset2{
+    padding: 15px 132px 35px;
+}
+
+#verifyReset2 button,
 #verifyReset button{
     border-radius: 5px;
     padding: 5px 10px;
     font-size: 18px;
 }
+
 #saveVerified,
 #resetVerified{
     border: 3px solid rgba(128, 128, 128, 0.75);
-    font-size: 25px;
+    font-size: 20px;
     color: white;
     background-color: black;
-    opacity: 90%;
+    opacity: 95%;
     width: fit-content;
     text-align: center;
-    left: 70px;
+    left: 63px;
     right: 0;
-    bottom: 15px;
+    z-index: 1;
+    bottom: 8px;
     margin-inline: auto;
-    padding: 45px 55px;
+    padding: 32.5px 40px;
     position: fixed;
     display: none;
 }
