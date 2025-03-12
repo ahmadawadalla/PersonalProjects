@@ -378,11 +378,15 @@ document.addEventListener('mousemove',(event)=>{
     yMousePosition = event.clientY
     xMousePosition = event.clientX
 })
+document.getElementById('inputTitle').addEventListener('keypress',(event)=> {if(event.key === "Enter") changeTitle()})
 
 let lastCallTimeGC = 0
 let lastCallTimeGCNoise = 0
+let lastCallSave = 0
 let currentAudio = null
 let checksCheated = 0
+
+let currentTitleName = {title:'Galleon Clicker'}
 
 // resizes the divs according to the window size
 function resizer(){
@@ -412,17 +416,25 @@ function saveGame(){
     localStorage.setItem("game",JSON.stringify(game))
     localStorage.setItem("gameStats",JSON.stringify(gameStats))
     localStorage.setItem("upgradesBought",JSON.stringify(upgradesBought))
+    localStorage.setItem("TitleName",JSON.stringify(currentTitleName))
 }
 
 // Opens a div that says that the game is being saved
 function saveVerified(){
     let saveVerified = document.getElementById("saveVerified")
     saveVerified.style.display = 'block'
-    
+
+
     saveGame()
-    setTimeout(()=> {
-        saveGame(); saveVerified.style.display = 'none'
-    },1500)
+    let currTime = Date.now()
+    let timeSinceLastCall = currTime - lastCallSave
+    if (timeSinceLastCall >= 1550){
+        setTimeout(() => {
+            saveGame();
+            saveVerified.style.display = 'none'
+        }, 1500)
+        lastCallSave = currTime
+    }
 }
 
 // opens the game stats bar
@@ -430,6 +442,7 @@ function openStatsBar(){
     let gameStatsBar = document.getElementById('gameStatsBar')
     let gameDescription = document.getElementById('gameDescription')
     let upgrades = document.getElementById('middleUpgradeDiv')
+    let changeTitle = document.getElementById('changeTitle')
 
     if (gameStatsBar.style.display === 'block') {
         upgrades.style.display = 'block'
@@ -438,6 +451,7 @@ function openStatsBar(){
     else {
         gameDescription.style.display = 'none'
         upgrades.style.display = 'none'
+        changeTitle.style.display = 'none'
         gameStatsBar.style.display = 'block'
         update()
     }
@@ -461,6 +475,7 @@ function openGameDescription(){
     let gameDescription = document.getElementById('gameDescription')
     let gameStatsBar = document.getElementById('gameStatsBar')
     let upgrades = document.getElementById('middleUpgradeDiv')
+    let changeTitle = document.getElementById('changeTitle')
 
     if (gameDescription.style.display === 'block') {
         upgrades.style.display = 'block'
@@ -469,6 +484,7 @@ function openGameDescription(){
     else {
         gameStatsBar.style.display = 'none'
         upgrades.style.display = 'none'
+        changeTitle.style.display = 'none'
         gameDescription.style.display = 'block'
         update()
     }
@@ -484,11 +500,13 @@ function closeGameDescription(){
 // Opens a div that asks the user to verify that they want to reset
 function verifyReset(){
     let verifyReset = document.getElementById('verifyReset')
+    let changeTitle = document.getElementById('changeTitle')
 
     if (verifyReset.style.display === 'block') {
         verifyReset.style.display = 'none'
     }
     else {
+        changeTitle.style.display = 'none'
         verifyReset.style.display = 'block'
     }
 }
@@ -520,9 +538,63 @@ function resetVerified(){
     },2000)
 }
 
+// opens the change title div
+function openChangeTitle(){
+    let changeTitle = document.getElementById('changeTitle')
+    let inputTitle = document.getElementById('inputTitle')
+    let verifyReset = document.getElementById('verifyReset')
+    let verifyReset2 = document.getElementById('verifyReset2')
+
+
+    if (changeTitle.style.display === 'block') {
+        closeChangeTitle()
+    }
+    else {
+        verifyReset.style.display = 'none'
+        verifyReset2.style.display = 'none'
+        changeTitle.style.display = 'block'
+        inputTitle.focus()
+
+        update()
+    }
+}
+
+// closes the change title div
+function closeChangeTitle(){
+    let changeTitle = document.getElementById('changeTitle')
+    let inputTitle = document.getElementById('inputTitle')
+
+    changeTitle.style.display = 'none'
+    inputTitle.value = ''
+}
+
+// when the page is refreshed the new title is loaded with it
+function loadCurrentTitle(){
+    document.getElementById('pageTitle').innerHTML = currentTitleName.title
+    document.getElementById('editIcon').style.marginLeft = 280 + (currentTitleName.title.length * 6) + 'px'
+}
+
+// change name of clicker page title
+function changeTitle(){
+    let inputTitle = document.getElementById('inputTitle')
+    let checkInputValue = ''
+    for (let i in inputTitle.value){
+        if (inputTitle.value[i] !== ' '){
+            checkInputValue += inputTitle.value[i]
+        }
+    }
+    if(checkInputValue !== '') {
+        currentTitleName.title = (inputTitle.value).trim()
+        inputTitle.value = ''
+        document.getElementById('changeTitle').style.display = 'none'
+        loadCurrentTitle()
+        saveGame()
+    }
+}
+
 // Updates the numbers in the game
 function update(){
-    document.getElementById('tabTitle').innerHTML = `${numberString(game.galleon)} Galleon Clicker`
+    document.getElementById('tabTitle').innerHTML = `${numberString(game.galleon)} ${currentTitleName.title}`
     document.getElementById('displayGalleonNumber').innerHTML = `${numberString(game.galleon)} Galleons`
     document.getElementById('galleonPerSecond').innerHTML = `${numberString(galleonPS())} PER SECOND`
     updateTime()
@@ -1124,6 +1196,13 @@ function upgradeInfoRemove(){
     else
         gameStats = JSON.parse(localStorage.getItem("gameStats"))
 
+    // save title name
+    if (localStorage.getItem("TitleName") == null)
+        localStorage.setItem("TitleName", JSON.stringify(currentTitleName))
+    else
+        currentTitleName = JSON.parse(localStorage.getItem("TitleName"))
+
+    loadCurrentTitle()
     update()
     saveGame()
     resizer()

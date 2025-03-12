@@ -41,13 +41,28 @@ button{
 #pageTitle{
     background-color: rgba(204, 112, 215, 0.19);
     border-radius: 10px;
-    font-size: 24px;
+    font-size: 23px;
+    font-weight: bold;
     margin-top: 100px;
     text-align: center;
     padding: 4px 75px;
     top: -50px;
     color: white;
     position: fixed;
+}
+
+#editIcon{
+    position: fixed;
+    margin-top: 48px;
+    cursor: pointer;
+}
+
+#inputTitle{
+    text-align: center;
+    width: 200px;
+    font-size: 18px;
+    border-radius: 7px;
+    margin-bottom: 10px
 }
 
 #options{
@@ -265,6 +280,16 @@ button:hover{
     box-shadow: black 2px 6px 8px;
 }
 
+#pageTitle:hover{
+    cursor: pointer;
+    text-shadow: white 0 0 15px;
+}
+
+#editIcon:hover{
+    filter: drop-shadow(0px 0px 7px darkblue);
+
+}
+
 #upgradeInfo{
     background: rgba(0,0,0,0.95);
     border: 2px solid rgba(128, 128, 128, 0.75);
@@ -302,7 +327,7 @@ button:hover{
     width: fit-content;
     text-align: center;
     z-index: 1;
-    left: 70px;
+    left: 75px;
     right: 0;
     margin-top: 30px;
     margin-inline: auto;
@@ -353,6 +378,25 @@ button:hover{
     padding: 45px 55px;
     left: 509px;
     z-index: -1;
+    position: fixed;
+    display: none;
+}
+
+#changeTitle{
+    border: 3px solid rgba(128, 128, 128, 0.75);
+    border-radius: 6px;
+    font-size: 22px;
+    color: black;
+    background-color: lightgray;
+    width: fit-content;
+    text-align: center;
+    z-index: 1;
+    left: 75px;
+    right: 0;
+    margin-top: 200px;
+    margin-inline: auto;
+    padding: 15px 45px 35px;
+
     position: fixed;
     display: none;
 }
