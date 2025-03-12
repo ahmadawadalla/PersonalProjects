@@ -644,8 +644,8 @@ function galleonClicked(){
     let timeSinceLastCall = currTime - lastCallTimeGC
 
     // to make auto clicker less powerful
-    if (timeSinceLastCall >= (1000 / 55)) {
-        let galleon = document.getElementById('Galleon')
+    if (timeSinceLastCall >= (100)) {
+        let galleon = document.getElementById('galleonPicture')
         galleon.addEventListener('mousedown',()=>{galleonNoise()})
         galleon.addEventListener('mouseup',()=>{galleonNoise()})
 
@@ -655,11 +655,12 @@ function galleonClicked(){
 
         let numberFlying = document.createElement('div')
         numberFlying.style.position = 'fixed'
-        numberFlying.style.zIndex = '1000'
+        numberFlying.style.zIndex = '1'
         numberFlying.style.fontSize = '20px'
         numberFlying.style.fontWeight = 'bold'
         numberFlying.style.transition = 'transform 2s, opacity 5s'
         numberFlying.style.cursor = 'pointer'
+        numberFlying.style.pointerEvents = 'none'
 
         numberFlying.innerHTML = '+' + numberString(Math.round(game.clickRate * 10) / 10)
 
@@ -668,15 +669,11 @@ function galleonClicked(){
         numberFlying.style.top = yMousePosition - 40 + 'px';
         numberFlying.style.left = xMousePosition - 17 - (numberFlying.innerHTML.length * 2.5) + randomPosition + 'px';
 
-        galleon.prepend(numberFlying)
+        document.getElementById('Galleon').prepend(numberFlying)
 
         setTimeout(() => {numberFlying.style.transform = 'translateY(-90px)';numberFlying.style.opacity = '0';}, 5)
 
         setTimeout(() => {numberFlying.remove()}, 2000)
-
-        numberFlying.addEventListener('click', () => {galleonClicked()})
-        numberFlying.addEventListener('mousedown', () => {galleonNoise();})
-        numberFlying.addEventListener('mouseup', () => {galleonNoise()})
 
         update()
 
