@@ -852,7 +852,7 @@ function showUpgrade(){
         document.getElementById('ironMouse').style.display = 'inline-grid'
     if(!upgradesBought['titaniumMouseBought'] && gameStats.totalGalleonsClicked >= 10 ** 9)
         document.getElementById('titaniumMouse').style.display = 'inline-grid'
-    if(!upgradesBought['magicalMouseBought'] && gameStats.totalGalleonsClicked >= 100 * 10 ** 6)
+    if(!upgradesBought['magicalMouseBought'] && gameStats.totalGalleonsClicked >= 100 * 10 ** 9)
         document.getElementById('magicalMouse').style.display = 'inline-grid'
 
     // muggles
