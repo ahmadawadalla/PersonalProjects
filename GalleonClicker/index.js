@@ -382,6 +382,7 @@ document.addEventListener('mousemove',(event)=>{
 let lastCallTimeGC = 0
 let lastCallTimeGCNoise = 0
 let currentAudio = null
+let checksCheated = 0
 
 // resizes the divs according to the window size
 function resizer(){
@@ -545,9 +546,10 @@ function update(){
     }
 
     // checks if cheated
-    if(gameStats.totalGalleonsEarned < game.galleon){
-        location.reload()
-    }
+    if(gameStats.totalGalleonsEarned < game.galleon)
+        game.galleon = checksCheated
+    else
+        checksCheated = game.galleon
 }
 
 // the time in seconds, mins, etc.
