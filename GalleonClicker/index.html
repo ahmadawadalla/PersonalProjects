@@ -37,7 +37,7 @@
     </div>
 
     <div id="changeTitle">
-        <button onclick="closeChangeTitle()" style="all: revert; float: right; margin-right: -35px; margin-top: -5px; padding: 3px 6px">X</button>
+        <button onclick="closeChangeTitle()" onmouseup="clickingNoise()" style="all: revert; float: right; margin-right: -35px; margin-top: -5px; padding: 3px 6px">X</button>
         <h3 style="font-size: 22px">Name Of Your Galleon Clicker</h3>
         <hr style="width: 90%; margin-left: 15px; margin-top: -5px; padding: 0.5px 0;background: #353131">
 
@@ -50,17 +50,18 @@
             <option value="Slytherin"></option>
         </datalist>
         <br>
-        <button onclick="changeTitle()" style="padding: 4px 0; width: 75px; font-size: 16px;">confirm</button>
-        <button onclick="closeChangeTitle()" style="padding: 4px 0; width: 75px; font-size: 16px;">close</button>
+        <button onclick="changeTitle()" onmouseup="clickingNoise()" style="padding: 4px 0; width: 75px; font-size: 16px;">confirm</button>
+        <button onclick="closeChangeTitle()" onmouseup="clickingNoise()" style="padding: 4px 0; width: 75px; font-size: 16px;">close</button>
     </div>
 
     <div id="mainContainer">
         <div id="leftDiv" >
-            <div style="width: 503px; display: flex; justify-content: center">
-                <p id="pageTitle" onclick="openChangeTitle()">Galleon Clicker</p>
+            <div onmouseup="clickingNoise()">
+                <div style="width: 503px; display: flex; justify-content: center">
+                    <p id="pageTitle" onclick="openChangeTitle()">Galleon Clicker</p>
+                </div>
+                <img id="editIcon" src="Pictures/editIcon.png" onclick="openChangeTitle()" width="20" height="20">
             </div>
-            <img id="editIcon" src="Pictures/editIcon.png" onclick="openChangeTitle()" width="20" height="20">
-
             <div id="numberOfGalleon">
                 <p id="displayGalleonNumber"></p>
             </div>
@@ -74,21 +75,21 @@
         </div>
         <div id="middleDiv">
             <div id="options">
-                <button id="saveButton" onclick="saveVerified()">Save</button>
-                <button id="gameStats" onclick="openStatsBar()">Stats</button>
-                <button id="info" onclick="openGameDescription()">Info</button>
-                <button id="resetButton" onclick="verifyReset()">Reset</button>
+                <button id="saveButton" onclick="saveVerified()" onmouseup="clickingNoise()">Save</button>
+                <button id="gameStats" onclick="openStatsBar()" onmouseup="clickingNoise()">Stats</button>
+                <button id="info" onclick="openGameDescription()" onmouseup="clickingNoise()">Info</button>
+                <button id="resetButton" onclick="verifyReset()" onmouseup="clickingNoise()">Reset</button>
 
                 <div id="saveVerified">The Game Is Being Saved</div>
                 <div id="verifyReset">
                     <p>Are You Sure You Want To Reset?</p>
-                    <button onclick="verifyReset2()">Yes</button>
-                    <button onclick="document.getElementById('verifyReset').style.display = 'none';">No</button>
+                    <button onclick="verifyReset2()" onmouseup="clickingNoise()">Yes</button>
+                    <button onclick="document.getElementById('verifyReset').style.display = 'none';" onmouseup="clickingNoise()">No</button>
                 </div>
                 <div id="verifyReset2">
                     <p>Are You Sure?</p>
-                    <button onclick="resetVerified()">Do It</button>
-                    <button onclick="document.getElementById('verifyReset2').style.display = 'none';">No</button>
+                    <button onclick="resetVerified()" onmouseup="clickingNoise()">Do It</button>
+                    <button onclick="document.getElementById('verifyReset2').style.display = 'none';" onmouseup="clickingNoise()">No</button>
                 </div>
                 <div id="resetVerified">The Game Is Being Reset</div>
                 <div id="gameStatsBar">

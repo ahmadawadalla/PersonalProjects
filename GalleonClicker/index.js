@@ -720,8 +720,8 @@ function galleonClicked(){
     // to make auto clicker less powerful
     if (timeSinceLastCall >= (100)) {
         let galleon = document.getElementById('galleonPicture')
-        galleon.addEventListener('mousedown',()=>{galleonNoise()})
-        galleon.addEventListener('mouseup',()=>{galleonNoise()})
+        galleon.addEventListener('mousedown',()=>{clickingNoise()})
+        galleon.addEventListener('mouseup',()=>{clickingNoise()})
 
         game.galleon += game.clickRate
         gameStats.totalGalleonsClicked += game.clickRate
@@ -755,8 +755,8 @@ function galleonClicked(){
     }
 }
 
-// noise when the galleon is clicked
-function galleonNoise(){
+// noise when something is clicked
+function clickingNoise(){
     let currTime = Date.now()
     let timeSinceLastCall = currTime - lastCallTimeGCNoise
 
@@ -1099,6 +1099,7 @@ function buyUpgrade(idName) {
             game.voldemortGPS *= 2
         }
 
+        clickingNoise()
         update()
     }
 }
