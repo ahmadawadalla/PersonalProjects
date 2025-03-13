@@ -701,7 +701,7 @@ function timeString(time){
 // converts number to string
 function numberString(number){
     if (number < 10 ** 6)
-        return number.toLocaleString()
+        return (Math.round(number * 10) / 10).toLocaleString()
 
     let numString = ['Million','Billion','Trillion','Quadrillion','Quintillion','Sextillion','Septillion','Octillion','Nonillion','Decillion']
 
