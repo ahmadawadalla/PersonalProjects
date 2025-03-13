@@ -714,7 +714,7 @@ function numberString(number){
             word = numString[i]
         else {
             number /= (10 ** (3 * (1 + i)))
-            return (Math.floor(number * 10) / 10).toLocaleString() + ' ' + word
+            return (Math.floor(number * 100) / 100).toLocaleString() + ' ' + word
         }
     }
 }
