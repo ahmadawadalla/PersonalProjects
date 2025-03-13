@@ -700,8 +700,11 @@ function timeString(time){
 
 // converts number to string
 function numberString(number){
+    if (number < 10 ** 3){
+        return (Math.round(number * 10) /10).toLocaleString()
+    }
     if (number < 10 ** 6)
-        return (Math.round(number * 10) / 10).toLocaleString()
+        return Math.round(number).toLocaleString()
 
     let numString = ['Million','Billion','Trillion','Quadrillion','Quintillion','Sextillion','Septillion','Octillion','Nonillion','Decillion']
 
@@ -1254,10 +1257,10 @@ function upgradeInfoRemove(){
 
 
     setInterval(() => {
-        game.galleon += galleonPS()
-        gameStats.totalGalleonsEarned += galleonPS()
+        game.galleon += (galleonPS() / 10)
+        gameStats.totalGalleonsEarned += (galleonPS() / 10)
         update()
-    }, 1000)
+    }, 100)
     setInterval(() => {
         saveVerified()
     }, 30000)
