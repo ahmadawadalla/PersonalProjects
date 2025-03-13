@@ -572,6 +572,46 @@ function closeChangeTitle(){
 function loadCurrentTitle(){
     document.getElementById('pageTitle').innerHTML = currentTitleName.title
     document.getElementById('editIcon').style.marginLeft = 280 + (currentTitleName.title.length * 6) + 'px'
+
+    let leftDiv = document.getElementById('leftDiv')
+    let banner1 = document.createElement('img')
+    let banner2 = document.createElement('img')
+    banner1.style.position = 'fixed'
+    banner1.style.width = '60px'
+    banner1.style.height = '60px'
+    banner1.style.top = '40px'
+    banner1.style.left = '50px'
+
+    banner2.style.position = 'fixed'
+    banner2.style.width = '60px'
+    banner2.style.height = '60px'
+    banner2.style.top = '40px'
+    banner2.style.left = '395px'
+
+    if(currentTitleName.title.toLowerCase().indexOf('gryffindor') !== -1){
+        banner1.src = 'Pictures/GryffindorBanner.png'
+        banner2.src = 'Pictures/GryffindorBanner.png'
+        leftDiv.appendChild(banner1)
+        leftDiv.appendChild(banner2)
+    }
+    else if(currentTitleName.title.toLowerCase().indexOf('hufflepuff') !== -1){
+        banner1.src = 'Pictures/HufflepuffBanner.png'
+        banner2.src = 'Pictures/HufflepuffBanner.png'
+        leftDiv.appendChild(banner1)
+        leftDiv.appendChild(banner2)
+    }
+    else if(currentTitleName.title.toLowerCase().indexOf('ravenclaw') !== -1){
+        banner1.src = 'Pictures/RavenclawBanner.png'
+        banner2.src = 'Pictures/RavenclawBanner.png'
+        leftDiv.appendChild(banner1)
+        leftDiv.appendChild(banner2)
+    }
+    else if(currentTitleName.title.toLowerCase().indexOf('slytherin') !== -1){
+        banner1.src = 'Pictures/SlytherinBanner.png'
+        banner2.src = 'Pictures/SlytherinBanner.png'
+        leftDiv.appendChild(banner1)
+        leftDiv.appendChild(banner2)
+    }
 }
 
 // change name of clicker page title
