@@ -106,11 +106,12 @@ let upgradesBought = {
     harrysProphecyBought: false,
 
     // Lupins
-    moonBought: false,
-    maraudersMapBought: false,
-    wolfPatronusBought: false,
-    wolfsbanePotionBought: false,
     prefectBadgeBought: false,
+    maraudersMapBought: false,
+    wolfsbanePotionBought: false,
+    wolfPatronusBought: false,
+    moonBought: false,
+
 
     // mcGonagall
     gingerNewtBought: false,
@@ -208,11 +209,12 @@ let upgradesCost = {
     harrysProphecyCost: 650 * 10 ** 9,
 
     // lupins
-    moonCost: 14 * 10 ** 6,
+    prefectBadgeCost: 14 * 10 ** 6,
     maraudersMapCost: 70 * 10 ** 6,
-    wolfPatronusCost: 700 * 10 ** 6,
-    wolfsbanePotionCost: 70 * 10 ** 9,
-    prefectBadgeCost: 7 * 10 ** 12,
+    wolfsbanePotionCost: 700 * 10 ** 6,
+    wolfPatronusCost: 70 * 10 ** 9,
+    moonCost:  7 * 10 ** 12,
+
 
     // mcGonagall
     gingerNewtCost: 200 * 10 ** 6,
@@ -309,11 +311,12 @@ let upgradesDescription = {
     harrysProphecyDescription: "Trelawneys are twice as efficient.",
 
     // lupins
-    moonDescription: "Lupins are twice as efficient.",
-    maraudersMapDescription: "Lupins are twice as efficient.",
-    wolfPatronusDescription: "Lupins are twice as efficient.",
-    wolfsbanePotionDescription: "Lupins are twice as efficient.",
     prefectBadgeDescription: "Lupins are twice as efficient.",
+    maraudersMapDescription: "Lupins are twice as efficient.",
+    wolfsbanePotionDescription: "Lupins are twice as efficient.",
+    wolfPatronusDescription: "Lupins are twice as efficient.",
+    moonDescription: "Lupins are twice as efficient.",
+
 
     // mcGonagall
     gingerNewtDescription: "McGonagalls are twice as efficient.",
