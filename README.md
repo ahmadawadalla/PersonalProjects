@@ -11,6 +11,8 @@
 Galleon Clicker is a Harry Potter clicker game where players earn Galleons by clicking a coin and buying iconic wizards to automate wealth generation. 
 This game features upgrades, wizards, and magical sound effects to make the game more engaging.
 
+⚠️ For the best experience, play on a computer or laptop. The game is optimized for larger screens and may not function as smoothly on mobile devices
+
 **✨ Features**
 - Click to earn Galleons and unlock upgrades
 - Hire wizards (e.g., Hagrid, Hermione, Dumbledore) to increase passive income
@@ -24,6 +26,7 @@ This game features upgrades, wizards, and magical sound effects to make the game
 2. Use Galleons to hire wizards and increase passive income.
 3. Wizards generate Galleons per second (GPS), helping you earn faster.
 4. Upgrade and expand your wizarding wealth!
+
 
 **🛠️ Code Used**
 - JavaScript (DOM manipulation, local storage, event handling)
