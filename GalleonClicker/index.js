@@ -373,14 +373,8 @@ let upgradesDescription = {
 let yMousePosition = 0
 let xMousePosition = 0
 
-window.addEventListener('resize',()=>{
-    resizer()
-})
-
-document.addEventListener('mousemove',(event)=>{
-    yMousePosition = event.clientY
-    xMousePosition = event.clientX
-})
+window.addEventListener('resize',()=>{resizer()})
+document.addEventListener('mousemove',(event)=>{yMousePosition = event.clientY; xMousePosition = event.clientX;})
 document.getElementById('inputTitle').addEventListener('keypress',(event)=> {if(event.key === "Enter") changeTitle()})
 
 let lastCallTimeGC = 0
@@ -426,7 +420,6 @@ function saveGame(){
 function saveVerified(){
     let saveVerified = document.getElementById("saveVerified")
     saveVerified.style.display = 'block'
-
 
     saveGame()
     let currTime = Date.now()
@@ -637,14 +630,8 @@ function changeTitle(){
 
 // Updates the numbers in the game
 function update(){
-    document.getElementById('tabTitle').innerHTML = `${numberString(game.galleon)} ${currentTitleName.title}`
     document.getElementById('displayGalleonNumber').innerHTML = `${numberString(game.galleon)} Galleons`
     document.getElementById('galleonPerSecond').innerHTML = `${numberString(galleonPS())} PER SECOND`
-    updateTime()
-    updateWizards()
-    upgradeBought()
-    showUpgrade()
-
 
     let gameStatsBar = document.getElementById('gameStatsBar')
     let timePlayed = document.getElementById('timePlayed')
@@ -665,6 +652,9 @@ function update(){
         game.galleon = checksCheated
     else
         checksCheated = game.galleon
+
+    updateTime()
+    updateWizards()
 }
 
 // the time in seconds, mins, etc.
@@ -873,6 +863,7 @@ function wizards(idName){
         playWizardNoise(wizardName)
     }
     updateWizards()
+    showUpgrade()
     update()
 }
 
@@ -1148,6 +1139,8 @@ function buyUpgrade(idName) {
         clickingNoise()
         update()
     }
+    upgradeBought()
+    showUpgrade()
 }
 
 // updates upgrade info when you hover over an upgrade
@@ -1249,21 +1242,31 @@ function upgradeInfoRemove(){
     else
         currentTitleName = JSON.parse(localStorage.getItem("TitleName"))
 
-    loadCurrentTitle()
     update()
-    saveGame()
+    upgradeBought()
+    showUpgrade()
+    loadCurrentTitle()
     resizer()
 
     // startup sound
     let sound = document.getElementById('startupSound')
     sound.volume = .7
 
+    document.getElementById('tabTitle').innerHTML = `${numberString(game.galleon)} galleons - Galleon Clicker`
 
+    // changes tab title every 2.5 seconds
+    setInterval(() => {
+        document.getElementById('tabTitle').innerHTML = `${numberString(game.galleon)} galleons - Galleon Clicker`
+    }, 3500)
+
+    // updates every 1/10 seconds
     setInterval(() => {
         game.galleon += (galleonPS() / 10)
         gameStats.totalGalleonsEarned += (galleonPS() / 10)
         update()
     }, 100)
+
+    // saves every 30 seconds
     setInterval(() => {
         saveVerified()
     }, 30000)
