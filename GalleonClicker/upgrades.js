@@ -76,7 +76,7 @@ let ids = [
 function upgradeImages(){
     ids.forEach(function(ids){
         let upperCaseId = ids.name[0].toUpperCase() +  ids.name.substring(1)
-        document.writeln('<div class="Upgrades"  id="' + ids.name + '" onclick="buyUpgrade(this)" onmousemove="upgradeInfoUpdate(this)" onmouseleave="upgradeInfoRemove()" style="display: inline-grid">');
+        document.writeln('<div class="Upgrades"  id="' + ids.name + '" onclick="buyUpgrade(this)" onmousemove="upgradeInfoUpdate(this)" onmouseleave="upgradeInfoRemove()" style="display: none">');
         document.writeln('  <img src="Pictures/Upgrades/' + upperCaseId + '.png" height="' + ids.h + '" width ="' + ids.w + '" alt="">');
         document.writeln('</div>');
     });
