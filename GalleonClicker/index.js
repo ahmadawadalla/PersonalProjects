@@ -631,20 +631,25 @@ function changeTitle(){
 // Updates the numbers in the game
 function update(){
     document.getElementById('displayGalleonNumber').innerHTML = `${numberString(game.galleon)} Galleons`
-    document.getElementById('galleonPerSecond').innerHTML = `${numberString(galleonPS())} PER SECOND`
 
     let gameStatsBar = document.getElementById('gameStatsBar')
-    let timePlayed = document.getElementById('timePlayed')
-    let galleonsClicked = document.getElementById('galleonsClicked')
-    let lifeTimeGalleons = document.getElementById('lifeTimeGalleons')
+
     if(gameStatsBar.style.display === 'block'){
+        let timePlayed = document.getElementById('timePlayed')
+        let galleonsClicked = document.getElementById('galleonsClicked')
+        let lifeTimeGalleons = document.getElementById('lifeTimeGalleons')
+        let lifeTimeWizards = document.getElementById('lifeTimeWizards')
+        let lifeTimeUpgrades = document.getElementById('lifeTimeUpgrades')
+
         let totalTime = gameStats.totalTimePlayed
 
         totalTime = timeString(totalTime)
 
-        timePlayed.innerHTML = `Total Time Played: ${totalTime}`
-        galleonsClicked.innerHTML = `Total Galleons Clicked: ${numberString(Math.round(gameStats.totalGalleonsClicked * 10) / 10)}`
-        lifeTimeGalleons.innerHTML = `Total Galleons Earned: ${numberString(Math.round(gameStats.totalGalleonsEarned * 10) / 10)}`
+        timePlayed.innerHTML = `Time Played: ${totalTime}`
+        galleonsClicked.innerHTML = `Galleons Clicked: ${numberString(Math.round(gameStats.totalGalleonsClicked * 10) / 10)}`
+        lifeTimeGalleons.innerHTML = `Galleons Earned: ${numberString(Math.round(gameStats.totalGalleonsEarned * 10) / 10)}`
+        lifeTimeWizards.innerHTML = `Wizards Owned: ${game.totalWizards}`
+        lifeTimeUpgrades.innerHTML = `Upgrades Bought: ${upgradeBought()}`
     }
 
     // checks if cheated
@@ -866,6 +871,7 @@ function wizards(idName){
     updateWizards()
     showUpgrade()
     update()
+    document.getElementById('galleonPerSecond').innerHTML = `${numberString(galleonPS())} PER SECOND`
 }
 
 // plays wizard sounds
@@ -943,11 +949,14 @@ function wizardStatsRemove(){
 
 // removes the upgrades that were bought from the screen
 function upgradeBought(){
+    let numBought = 0
     for(let key in upgradesBought) {
         if(upgradesBought[key]){
             document.getElementById(key.slice(0,-6)).style.display = 'none'
+            numBought ++
         }
     }
+    return numBought
 }
 
 // shows the upgrade on the screen
@@ -1142,6 +1151,7 @@ function buyUpgrade(idName) {
     }
     upgradeBought()
     showUpgrade()
+    document.getElementById('galleonPerSecond').innerHTML = `${numberString(galleonPS())} PER SECOND`
 }
 
 // updates upgrade info when you hover over an upgrade
@@ -1253,6 +1263,7 @@ function upgradeInfoRemove(){
     sound.volume = .7
 
     document.getElementById('tabTitle').innerHTML = `${numberString(game.galleon)} galleons - Galleon Clicker`
+    document.getElementById('galleonPerSecond').innerHTML = `${numberString(galleonPS())} PER SECOND`
 
     // changes tab title every 2.5 seconds
     setInterval(() => {
