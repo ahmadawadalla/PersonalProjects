@@ -933,11 +933,11 @@ function wizardStatsUpdate(idName){
     }
 
     if (level > 0)
-        wizardStatsGPSTotal.innerHTML = `${level} ${wizardName} produces ${numberString(wizardGPS * level)} per second (${GPSPercent}% of total GPS)\n`
+        wizardStatsGPSTotal.innerHTML = `${level} ${wizardName} produces ${numberString(wizardGPS * level)} per second <br>(<i>${GPSPercent}% of total GPS</i>)<br>`
     else
-        wizardStatsGPSTotal.innerHTML = `${wizardName} is currently not producing any per second\n`
+        wizardStatsGPSTotal.innerHTML = `${wizardName} is currently not producing any per second`
 
-    wizardStatsGPSPer.innerHTML = `\nEach ${wizardName} produces ${numberString(Math.round(wizardGPS * 10) / 10)} per second\n`
+    wizardStatsGPSPer.innerHTML = `Each ${wizardName} produces ${numberString(Math.round(wizardGPS * 10) / 10)} per second`
 
 }
 
