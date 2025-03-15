@@ -653,6 +653,7 @@ function update(){
     else
         checksCheated = game.galleon
 
+    showUpgrade()
     updateTime()
     updateWizards()
 }
@@ -1244,7 +1245,6 @@ function upgradeInfoRemove(){
 
     update()
     upgradeBought()
-    showUpgrade()
     loadCurrentTitle()
     resizer()
 
