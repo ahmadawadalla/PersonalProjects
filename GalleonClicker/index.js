@@ -732,7 +732,7 @@ function updateWizards(){
             document.getElementById(key).innerHTML = `${numberString(game[key])}`
             let wizard = document.getElementById(key.substring(0,key.indexOf('Cost')))
             if(game.galleon >= game[key]){
-                wizard.style.transition = 'opacity 750ms'
+                wizard.style.transition = 'transform 250ms opacity 750ms'
                 wizard.style.opacity = '100%'
                 document.getElementById(key).style.color = 'green'
             }
