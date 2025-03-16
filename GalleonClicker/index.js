@@ -659,7 +659,6 @@ function update(){
     else
         checksCheated = game.galleon
 
-    showUpgrade()
     updateTime()
     updateWizards()
 }
@@ -733,7 +732,6 @@ function updateWizards(){
             document.getElementById(key).innerHTML = `${numberString(game[key])}`
             let wizard = document.getElementById(key.substring(0,key.indexOf('Cost')))
             if(game.galleon >= game[key]){
-                wizard.style.transition = 'transform 250ms opacity 750ms'
                 wizard.style.opacity = '100%'
                 document.getElementById(key).style.color = 'green'
             }
@@ -793,6 +791,7 @@ function galleonClicked(){
         setTimeout(() => {numberFlying.remove()}, 2000)
 
         update()
+        showUpgrade()
 
         lastCallTimeGC = currTime
     }
@@ -869,7 +868,6 @@ function wizards(idName){
 
         playWizardNoise(wizardName)
     }
-    updateWizards()
     showUpgrade()
     update()
     document.getElementById('galleonPerSecond').innerHTML = `${numberString(galleonPS())} PER SECOND`
@@ -1255,6 +1253,7 @@ function upgradeInfoRemove(){
         currentTitleName = JSON.parse(localStorage.getItem("TitleName"))
 
     update()
+    showUpgrade()
     upgradeBought()
     loadCurrentTitle()
     resizer()
@@ -1268,10 +1267,11 @@ function upgradeInfoRemove(){
 
     // updates every 1/10 seconds
     setInterval(() => {
-        game.galleon += (galleonPS() / 5)
-        gameStats.totalGalleonsEarned += (galleonPS() / 5)
+        let gps = galleonPS()
+        game.galleon += (gps / 10)
+        gameStats.totalGalleonsEarned += (gps / 10)
         update()
-    }, 200)
+    }, 100)
 
     // saves every 30 seconds
     setInterval(() => {

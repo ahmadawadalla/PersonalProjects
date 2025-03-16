@@ -195,7 +195,8 @@ button{
     border: solid white;
     height: 100px;
     width: 385px;
-    transition: transform 250ms;
+    transition: opacity 750ms, transform 250ms;
+    opacity: 9%;
     margin-top: 25px;
 }
 
