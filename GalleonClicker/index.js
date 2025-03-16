@@ -1268,10 +1268,10 @@ function upgradeInfoRemove(){
 
     // updates every 1/10 seconds
     setInterval(() => {
-        game.galleon += (galleonPS() / 10)
-        gameStats.totalGalleonsEarned += (galleonPS() / 10)
+        game.galleon += (galleonPS() / 5)
+        gameStats.totalGalleonsEarned += (galleonPS() / 5)
         update()
-    }, 100)
+    }, 200)
 
     // saves every 30 seconds
     setInterval(() => {
