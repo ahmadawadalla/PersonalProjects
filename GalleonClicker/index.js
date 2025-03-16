@@ -630,6 +630,7 @@ function changeTitle(){
 
 // Updates the numbers in the game
 function update(){
+    document.getElementById('tabTitle').innerHTML = `${numberString(game.galleon)} galleons - Galleon Clicker`
     document.getElementById('displayGalleonNumber').innerHTML = `${numberString(game.galleon)} Galleons`
 
     let gameStatsBar = document.getElementById('gameStatsBar')
@@ -1264,11 +1265,6 @@ function upgradeInfoRemove(){
 
     document.getElementById('tabTitle').innerHTML = `${numberString(game.galleon)} galleons - Galleon Clicker`
     document.getElementById('galleonPerSecond').innerHTML = `${numberString(galleonPS())} PER SECOND`
-
-    // changes tab title every 2.5 seconds
-    setInterval(() => {
-        document.getElementById('tabTitle').innerHTML = `${numberString(game.galleon)} galleons - Galleon Clicker`
-    }, 3500)
 
     // updates every 1/10 seconds
     setInterval(() => {
