@@ -732,13 +732,13 @@ function updateWizards(){
             document.getElementById(key).innerHTML = `${numberString(game[key])}`
             let wizard = document.getElementById(key.substring(0,key.indexOf('Cost')))
             if(game.galleon >= game[key]){
+                wizard.style.transition = 'opacity 750ms'
                 wizard.style.opacity = '100%'
-
                 document.getElementById(key).style.color = 'green'
             }
             else{
                 document.getElementById(key).style.color = '#942121'
-                wizard.style.opacity = '11%'
+                wizard.style.opacity = '9%'
             }
         }
         else if(key.indexOf('Level') !== -1){
@@ -746,8 +746,8 @@ function updateWizards(){
             totalWizards += game[key]
             let wizard = document.getElementById(key.substring(0,key.indexOf('Level')))
 
-            if (game[key] >= 1){
-                wizard.style.opacity = '100%'
+            if (game[key] >= 1 && game.galleon < game[key.substring(0,key.indexOf('Level')) + 'Cost']){
+                wizard.style.opacity = '40%'
             }
         }
     }
