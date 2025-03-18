@@ -382,6 +382,8 @@ let lastCallTimeGCNoise = 0
 let lastCallSave = 0
 let currentAudio = null
 let checksCheated = 0
+let tabStart = 0
+let tabStop = 0
 
 let currentTitleName = {title:'Galleon Clicker'}
 
@@ -1268,8 +1270,24 @@ function upgradeInfoRemove(){
     // updates every 1/10 seconds
     setInterval(() => {
         let gps = galleonPS()
-        game.galleon += (gps / 10)
-        gameStats.totalGalleonsEarned += (gps / 10)
+        if(!document.hidden) {
+            if(tabStop > 0){
+                game.galleon += gps * tabStop
+                gameStats.totalGalleonsEarned += gps * tabStop
+                tabStop = 0
+            }
+            game.galleon += (gps / 10)
+            gameStats.totalGalleonsEarned += (gps / 10)
+            tabStart = Date.now() / 1000
+        }
+        else{
+            tabStop = Date.now() / 1000 - tabStart
+            if(tabStop >= 15){
+                game.galleon += gps * tabStop
+                gameStats.totalGalleonsEarned += gps * tabStop
+                tabStart = Date.now() / 1000
+            }
+        }
         update()
     }, 100)
 
