@@ -775,7 +775,7 @@ function galleonClicked(){
         numberFlying.style.zIndex = '1'
         numberFlying.style.fontSize = '20px'
         numberFlying.style.fontWeight = 'bold'
-        numberFlying.style.transition = 'transform 2s, opacity 5s'
+        numberFlying.style.transition = 'transform 2.5s, opacity 5s'
         numberFlying.style.cursor = 'pointer'
         numberFlying.style.pointerEvents = 'none'
 
@@ -786,10 +786,9 @@ function galleonClicked(){
         numberFlying.style.top = yMousePosition - 40 + 'px';
         numberFlying.style.left = xMousePosition - 17 - (numberFlying.innerHTML.length * 2.5) + randomPosition + 'px';
 
-        document.getElementById('Galleon').prepend(numberFlying)
+        document.getElementById('Galleon').append(numberFlying)
 
-        setTimeout(() => {numberFlying.style.transform = 'translateY(-90px)';numberFlying.style.opacity = '0';}, 5)
-
+        setTimeout(() => {numberFlying.style.transform = 'translateY(-100px)';numberFlying.style.opacity = '0';}, 5)
         setTimeout(() => {numberFlying.remove()}, 2000)
 
         update()
@@ -1268,7 +1267,7 @@ function upgradeInfoRemove(){
     document.getElementById('galleonPerSecond').innerHTML = `${numberString(galleonPS())} PER SECOND`
 
     // updates every 1/10 seconds
-    setInterval(() => {
+    setInterval(()=>{
         let gps = galleonPS()
         if(!document.hidden) {
             if(tabStop > 0){
@@ -1289,7 +1288,7 @@ function upgradeInfoRemove(){
             }
         }
         update()
-    }, 100)
+    },100)
 
     // saves every 30 seconds
     setInterval(() => {
