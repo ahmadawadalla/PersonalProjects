@@ -790,11 +790,8 @@ function galleonClicked(){
 
         setTimeout(() => {numberFlying.style.transform = 'translateY(-100px)';numberFlying.style.opacity = '0';}, 5)
 
-        if(timeSinceLastCall < 105) {
-            setTimeout(() => {
-                numberFlying.remove()
-            }, 500)
-        }
+        if(timeSinceLastCall < 105)
+            setTimeout(() => {numberFlying.remove()}, 500)
         else
             setTimeout(() => {numberFlying.remove()}, 2000)
 
