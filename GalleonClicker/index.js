@@ -761,7 +761,7 @@ function galleonClicked(){
     let timeSinceLastCall = currTime - lastCallTimeGC
 
     // to make auto clicker less powerful
-    if (timeSinceLastCall >= (100)) {
+    if (timeSinceLastCall >= (90)) {
         let galleon = document.getElementById('galleonPicture')
         galleon.addEventListener('mousedown',()=>{clickingNoise()})
         galleon.addEventListener('mouseup',()=>{clickingNoise()})
@@ -789,7 +789,15 @@ function galleonClicked(){
         document.getElementById('Galleon').append(numberFlying)
 
         setTimeout(() => {numberFlying.style.transform = 'translateY(-100px)';numberFlying.style.opacity = '0';}, 5)
-        setTimeout(() => {numberFlying.remove()}, 2000)
+
+        if(timeSinceLastCall < 105) {
+            setTimeout(() => {
+                numberFlying.remove()
+            }, 500)
+            console.log(timeSinceLastCall)
+        }
+        else
+            setTimeout(() => {numberFlying.remove()}, 2000)
 
         update()
         showUpgrade()
