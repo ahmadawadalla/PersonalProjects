@@ -794,7 +794,6 @@ function galleonClicked(){
             setTimeout(() => {
                 numberFlying.remove()
             }, 500)
-            console.log(timeSinceLastCall)
         }
         else
             setTimeout(() => {numberFlying.remove()}, 2000)
