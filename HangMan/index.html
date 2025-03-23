@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=0.45">
+    <meta name="viewport" content="height=device-height, initial-scale=.4">
     <title>Hang Man</title>
 </head>
 <style>
@@ -53,15 +54,15 @@
     .base{
         border: 6px solid;
         border-radius: 10px;
-        margin: 0px 150px;
+        margin: 0 150px;
         width: 100px;
     }
     .pole{
         border: 6px solid;
         border-radius: 10px;
-        margin: 0px 200px -8px;
+        margin: 0 200px -8px;
         padding-top: 250px;
-        width: 0px;
+        width: 0;
     }
     .horizontal{
         border: 6px solid;
@@ -150,7 +151,7 @@
     <h2>Hang Man</h2>
     <div id="hiddenWord" ><p></p></div>
     <div id="lettersUsed"><p></p></div>
-    <input id="input" type="text" placeholder="Input Letter" maxlength="1"/>
+    <input id="input" type="text" placeholder="Input Letter" maxlength="1">
     <button onclick="inputChecker()">Submit</button>
     <div class="picture">
         <div class="stand">
